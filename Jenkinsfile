@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'ansible' }
+    agent { label 'Ansible' }
 
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
@@ -26,3 +26,4 @@ pipeline {
         }
     }
 }
+
