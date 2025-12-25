@@ -1,25 +1,20 @@
 pipeline {
-    agent any
+    agent { label 'ansible' }
+
+    environment {
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
+    }
 
     stages {
+
         stage('Clone Repo') {
             steps {
                 git 'https://github.com/abhigiri07/devops-cicd-project.git'
             }
         }
 
-        stage('Terraform Apply') {
-            steps {
-                dir('terraform') {
-                    sh '''
-                    terraform init
-                    terraform apply -auto-approve
-                    '''
-                }
-            }
-        }
 
-        stage('Configure EC2') {
+        stage('Configure Target EC2') {
             steps {
                 dir('ansible') {
                     sh '''
